@@ -58,7 +58,7 @@ body {
     vertical-align: middle;
 }
 #paddle {
-    height: 100px;
+    height: 150px;
     width: 10px;
     background-color: red;
     border-radius: 5px;
