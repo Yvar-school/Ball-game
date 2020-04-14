@@ -71,4 +71,5 @@ body {
     width: 25px;
     background-color: red;
     border-radius: 25px;
+    position: absolute;
 }
