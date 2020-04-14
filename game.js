@@ -61,11 +61,14 @@ function movePaddle() {
 }
 
 function run() {
-    console.log(gamearea.clientWidth);
     x += rX;
     ball.style.left = x + "px";
     y += rY;
     ball.style.top = y + "px";
+
+    if (paddle.style.top < 0){
+        y = 0
+    }
 
     if ( (y + ball.clientHeight > gamearea.clientHeight + 44) || ( -50 + y < 0))
     {
@@ -129,10 +132,16 @@ function Collide(subjectElement, targetElement){
 
 function upArrow() {
     paddleY -= 30;
+    if(paddleY < 50){
+        paddleY = 50;
+    }
 }
 
 function downArrow() {
     paddleY += 30;
+    if (paddleY + paddle.clientHeight - 60 > gamearea.clientHeight){
+        paddleY = (gamearea.clientHeight - 100)
+    }
 }
 
 function getRandomColor() {
