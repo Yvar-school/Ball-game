@@ -1,11 +1,25 @@
+/*
+*   General Variables
+*/
+
 var paddle, paddleY;
 
+var element = document.getElementById('paddle');
+
 var gamearea = document.getElementById('gamearea');
-x = 0;
+var score = 0;
+x = 300;
 y = 60;
 rY= 10;
 rX = 4;
 
+
+let keyState = {};
+
+function setKeystateByEvent(e, state = false) {
+    keyState[e.keyCode || e.which] = state;
+    return true;
+}
 
 function init() {
     paddle = document.getElementById('paddle');
@@ -13,7 +27,37 @@ function init() {
     paddleY = parseInt(stylepaddle.top);
     ball = document.getElementById('ball')
     StyleBall = getComputedStyle(ball);
+    setEventListeners();
+    setInterval(movePaddle, 60);
     setInterval(run, 10);
+}
+
+function setEventListeners() {
+    window.addEventListener('keydown', (e) => {
+        setKeystateByEvent(e, true);
+    }, true);
+
+    window.addEventListener('keyup', (e) => {
+        setKeystateByEvent(e, false);
+    }, true);
+
+    return true;
+}
+
+/**
+ * Delay fix paddle
+ *
+ * @link Fix https://stackoverflow.com/questions/12273451/how-to-fix-delay-in-javascript-keydown
+ */
+function movePaddle() {
+    if (keyState[38]) {
+        upArrow();
+    }
+    if (keyState[40]) {
+        downArrow();
+    }
+
+    element.style.top = paddleY + 'px';
 }
 
 function run() {
@@ -32,32 +76,63 @@ function run() {
         rX *= -1.5;
         ball.style.backgroundColor = getRandomColor();
     }
+    if(Collide(ball, paddle)){
+        rX *= -1;
+        paddle.style.backgroundColor = getRandomColor();    
+    }
     
+    if (x < -1)
+    {
+        score++;
+        document.getElementById('nummer').innerHTML = "score:" +score;
+        rX = 4;
+        x = 300;
+    }
+    switch (score)
+    {
+        case 1:
+            document.getElementById('Top').style.backgroundColor = getRandomColor();
+            document.getElementById('score').style.backgroundColor = getRandomColor();
+            document.getElementById('footer').style.backgroundColor = getRandomColor();
+        break;
+        case 2:
+            document.getElementById('Top').style.backgroundColor = getRandomColor();
+            document.getElementById('score').style.backgroundColor = getRandomColor();
+            document.getElementById('footer').style.backgroundColor = getRandomColor();
+        break;
+        case 3:
+            document.getElementById('Top').style.backgroundColor = getRandomColor();
+            document.getElementById('score').style.backgroundColor = getRandomColor();
+            document.getElementById('footer').style.backgroundColor = getRandomColor();
+        break;
+    }
+
 }
+function Collide(subjectElement, targetElement){
+    stylePaddle = getComputedStyle(targetElement);
+    styleBall = getComputedStyle(subjectElement);
+    var balLeft = parseInt(styleBall.left);
+    var balTop = parseInt(styleBall.top)
+    var bar1left = parseInt(stylePaddle.left)
+    var bar1top = parseInt(stylePaddle.top)
+    
+    if (balLeft < bar1left + paddle.clientWidth &&
+            balLeft + ball.clientWidth > bar1left &&
+            balTop < bar1top + paddle.clientHeight &&
+            ball.clientHeight + balTop > bar1top) {
+                return true;
+            } else{
+                return false;
+            }
+ }
 
 
 function upArrow() {
-    var element = document.getElementById('paddle');
-    paddleY -= 10;
-    element.style.top = paddleY + 'px';
+    paddleY -= 30;
 }
 
 function downArrow() {
-    var element = document.getElementById('paddle');
-    paddleY += 10;
-    element.style.top = paddleY + 'px';
-}
-
-document.onkeydown = function (event) {
-    switch (event.keyCode) {
-        case 38:
-            upArrow();
-            break;
-        case 40:
-            downArrow();
-            break;
-    }
-
+    paddleY += 30;
 }
 
 function getRandomColor() {
@@ -68,3 +143,4 @@ function getRandomColor() {
   }
   return color;
 }
+
