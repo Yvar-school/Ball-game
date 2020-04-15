@@ -104,9 +104,11 @@ function run() {
             document.getElementById('footer').style.backgroundColor = getRandomColor();
         break;
         case 3:
-            document.getElementById('Top').style.backgroundColor = getRandomColor();
-            document.getElementById('score').style.backgroundColor = getRandomColor();
-            document.getElementById('footer').style.backgroundColor = getRandomColor();
+            //localStorage.setItem('name', name);
+            //localStorage.setItem('Points', score);
+            document.cookie="ncookie="+name;
+            document.cookie="scookie="+score;
+            window.location.href='./points.php';
         break;
     }
 

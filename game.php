@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -24,6 +27,9 @@
         </div>
     </div>
 </body>
+    <script>
+        var name = '<?php echo $_SESSION['name'];?>';
+    </script>
     <script src="game.js"></script>
     <script>
         init();
