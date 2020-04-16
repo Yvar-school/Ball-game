@@ -1,3 +1,6 @@
+/*
+*   Stating general variables
+*/
 var paddle, paddleY;
 
 var element = document.getElementById('paddle');
@@ -9,14 +12,17 @@ y = 60;
 rY= 10;
 rX = 4;
 
-
+// holds information wich key is pressed or is it even pressed
 let keyState = {};
+
+// this function tells if its pressed or not
 
 function setKeystateByEvent(e, state = false) {
     keyState[e.keyCode || e.which] = state;
     return true;
 }
 
+// move var and the inteval for the game
 function init() {
     paddle = document.getElementById('paddle');
     stylepaddle = getComputedStyle(paddle);
@@ -27,7 +33,7 @@ function init() {
     setInterval(movePaddle, 60);
     setInterval(run, 10);
 }
-
+// Sets all Event Listeners for the game
 function setEventListeners() {
     window.addEventListener('keydown', (e) => {
         setKeystateByEvent(e, true);
@@ -56,6 +62,7 @@ function run() {
     ball.style.left = x + "px";
     y += rY;
     ball.style.top = y + "px";
+    // collision from the sides of the map
 
     if (paddle.style.top < 0){
         y = 0
@@ -82,6 +89,7 @@ function run() {
         rX = 4;
         x = 300;
     }
+    // fun switch case for fun
     switch (score)
     {
         case 1:
@@ -102,6 +110,8 @@ function run() {
     }
 
 }
+
+// collide function for my paddles
 function Collide(subjectElement, targetElement){
     stylePaddle = getComputedStyle(targetElement);
     styleBall = getComputedStyle(subjectElement);
@@ -134,7 +144,7 @@ function downArrow() {
         paddleY = (gamearea.clientHeight - 100)
     }
 }
-
+// generates a random color for the divs
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
   var color = '#';

@@ -1,5 +1,5 @@
 <?php 
-session_start();
+session_start(); // starting session so i can echo the user
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,7 +28,7 @@ session_start();
     </div>
 </body>
     <script>
-        var name = '<?php echo $_SESSION['name'];?>';
+        var name = '<?php echo $_SESSION['name'];?>'; // making a var so i can use the username in my javascript
     </script>
     <script src="game.js"></script>
     <script>
