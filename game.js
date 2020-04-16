@@ -1,7 +1,3 @@
-/*
-*   General Variables
-*/
-
 var paddle, paddleY;
 
 var element = document.getElementById('paddle');
@@ -44,11 +40,6 @@ function setEventListeners() {
     return true;
 }
 
-/**
- * Delay fix paddle
- *
- * @link Fix https://stackoverflow.com/questions/12273451/how-to-fix-delay-in-javascript-keydown
- */
 function movePaddle() {
     if (keyState[38]) {
         upArrow();
@@ -104,8 +95,6 @@ function run() {
             document.getElementById('footer').style.backgroundColor = getRandomColor();
         break;
         case 3:
-            //localStorage.setItem('name', name);
-            //localStorage.setItem('Points', score);
             document.cookie="ncookie="+name;
             document.cookie="scookie="+score;
             window.location.href='./points.php';

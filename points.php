@@ -28,5 +28,5 @@ $data = [
 $update = $connection->prepare($statement);
 
 $update->execute($data);
-
+header('Location: ./game.php');
 ?>
